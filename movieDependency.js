@@ -39,17 +39,35 @@ const legacyAPI = {
     }
 };
 
-legacyAPI.login('fred',(err,userData)=>{
 
-legacyAPI.getMovies(userData.userId,(err,movie)=>
-
-legacyAPI.getShowtimes(movie[0],(err,time)=> 
-legacyAPI.bookTicket(time[0],(err,seat) =>
-    console.log(`Success! Booked seat ${seat.seat} at ${time[0]}.`)
-)))
-}
+legacyAPI.login("username", (err, loginData) => {
+    if(err){
+        console.error("Error:", err);
+        return;
+    }
 
 
-)
+    legacyAPI.getMovies(loginData.userId, (err, movies)=> {
+        if(err){
+            console.error("failed to fetch movie:", error);
+        }
 
+        const firstMovie = movies[0];
+        legacyAPI.getShowtimes(firstMovie, (err, showtimes)=>{
+            if(err){
+                console.error("no showtimes found:", err);
+            }
+          
 
+             const firstShowtime = showtimes[0];
+
+             legacyAPI.bookTicket(firstShowtime, (err, bookingResult)=>{
+                if(err){
+                    console.error("failed to book:", err);
+                }
+                console.log(`🎉 Success! Booked seat ${bookingResult.seat} at ${firstShowtime}.`);
+             })
+        })
+    })
+
+})
