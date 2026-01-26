@@ -11,7 +11,7 @@ try{
   let url = 'https://jsonplaceholder.typicode.com/posts'
 
     let dataTosend = await fetch(url,{
-        method: 'POST',
+        method: 'POST',                         
         headers: {'Content-Type' : 'application/json'},
         body : JSON.stringify(dataTo)})
 
