@@ -7,11 +7,6 @@ async function getUsers(id){
     let first = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
     let second = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
 
-    // let response = await Promise.all([first,second])
-
-    // // let data = await response.json()
-    // let data = await Promise.all(response.map(res => res.json()))
-
 
     let users = await first.json()
     let posts = await second.json()
